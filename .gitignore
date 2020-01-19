@@ -132,3 +132,7 @@ dmypy.json
 
 # Warcraft III sound files
 sounds/
+data/
+
+# Telegram bot token
+token.txt

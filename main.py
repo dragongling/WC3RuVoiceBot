@@ -5,13 +5,13 @@ from telegram.ext import Updater, MessageHandler, Filters, CallbackQueryHandler
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+data = ['Злой Артес', 'Я получил власть, которая и не снилась моему отцу!', 'EvilArthasPissed3']
 
 
 def voice(update, context):
 	if update.message.text == 'власть':
-		cite = "Злой Артес: Я получил власть, которая и не снилась моему отцу!"
 		button_list = [
-			[InlineKeyboardButton(cite, callback_data='EvilArthasPissed3')]
+			[InlineKeyboardButton(f'{data[0]}: {data[1]}', callback_data=data[2])]
 		]
 		reply_markup = InlineKeyboardMarkup(button_list)
 		context.bot.send_message(chat_id=update.effective_chat.id, text="Выберите фразу", reply_markup=reply_markup)
@@ -20,8 +20,8 @@ def voice(update, context):
 
 
 def cb_handler(update, context):
-	if update.callback_query.data == 'EvilArthasPissed3':
-		context.bot.send_voice(chat_id=update.effective_chat.id, voice=open('sounds/EvilArthasPissed3.ogg', 'rb'))
+	if update.callback_query.data == data[2]:
+		context.bot.send_voice(chat_id=update.effective_chat.id, voice=open(f'sounds/{data[2]}.ogg', 'rb'))
 
 
 def error(update, context):
